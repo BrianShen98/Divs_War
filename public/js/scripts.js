@@ -1,0 +1,1222 @@
+$(document).ready(function(){
+	    var count = 4;
+	    var symbol =0;
+	    var slowblue = 0;
+	    var slowred = 0;
+	    var count1 = 6;
+	    var count2 = 1000;
+	    var count3 = 1000;
+	    var count4 = 1000;
+	    var cross = document.getElementById("cross");
+	    var trap = document.getElementById("trap");
+	    var hugeblock=document.getElementById("block");
+	    var stormguard=document.getElementById("stormguard");
+	    var ghost=document.getElementById("ghost");
+	    var div1 = $('#blockone');
+	    var div2 = $('#blocktwo');
+	    var topa;
+	    var lefta;
+	    var topb;
+	    var leftb;
+	    var topc;
+	    var leftc;
+     	    var topd;
+	    var leftd;
+	    var leftlethal;
+	    var toplethal;
+	    var blockoneleft;
+	    var blockonetop;
+	    var stop = 0;
+	    var blocktwotop;
+	    var blocktwoleft;
+	    var blockuptop;
+	    var blockupleft;
+	    var blockdowntop;
+	    var blockdownleft;
+	    var blocklefttop;
+	    var blockleftleft;
+	    var blockrighttop;
+	    var blockrightleft;
+	    var initial = 30;
+	    var seconds = document.getElementById("seconds");
+	    var blueuser;
+	    var reduser;
+	    var psycho=4;
+	    
+	    var value1 = setInterval(function(){
+					 topa = document.getElementById("a").offsetTop;
+					 lefta = document.getElementById("a").offsetLeft;
+					 topb = document.getElementById("b").offsetTop;
+					 leftb = document.getElementById("b").offsetLeft;
+					 topc = document.getElementById("c").offsetTop;
+					 leftc = document.getElementById("c").offsetLeft;
+					 topd = document.getElementById("d").offsetTop;
+					 leftd = document.getElementById("d").offsetLeft;
+					 
+				},0.0001);
+	    
+	    var topmiddle = document.getElementById("blockmiddle").offsetTop;
+	    
+	    function move(){
+		$("#lethal").animate({"left":"-100px"},"fast");
+		$("#lethal").animate({"top":"-100px"},"fast");
+		$("#lethal").animate({"left":"100px"},"fast");
+		$("#lethal").animate({"top":"100px"},"fast");
+	    }
+	  
+	    var value = setInterval(function(){move();},970);   
+	   
+	    var value2 = setInterval(function(){
+		leftlethal = document.getElementById("lethal").offsetLeft;
+		toplethal = document.getElementById("lethal").offsetTop;
+	    },0.0001);
+	    var value3 = setInterval(function(){
+		blockoneleft = document.getElementById("blockone").offsetLeft;
+		blockonetop = document.getElementById("blockone").offsetTop;
+	    },0.0001);
+	  
+	    var value4 = setInterval(function(){
+	        blocktwoleft=document.getElementById("blocktwo").offsetLeft;
+		blocktwotop=document.getElementById("blocktwo").offsetTop;
+	    },0.0001); 	    
+	    
+	    var value5 = setInterval(function(){
+		blockuptop = document.getElementById("blockup").offsetTop;
+		blockupleft = document.getElementById("blockup").offsetLeft;
+		blockdownheight = document.getElementById("blockdown").offsetHeight;
+		blockdownleft = document.getElementById("blockdown").offsetLeft;
+		blocklefttop = document.getElementById("blockleft").offsetTop;
+		blockleftleft = document.getElementById("blockleft").offsetLeft;
+		blockrighttop = document.getElementById("blockright").offsetTop;
+		blockrightwidth = document.getElementById("blockright").offsetWidth;				
+	    },0.0001);
+	   
+	    var value6 = setInterval(function(){
+		if(Math.abs(blockonetop+toplethal-blocktwotop)<100 && Math.abs(blockoneleft+leftlethal-blocktwoleft)<100)
+		{
+			stop =1;
+			$("#back").css("display","block");
+			$("#red").css("display","block");
+			$.getJSON("log1.php",function(data){
+				if(data == 0)
+				{
+					$("#lose2").css("display","block");
+				}
+				else
+				{
+					$("#lose1").css("display","block");
+				}			
+
+			});
+ 
+			clearInterval(value6);
+			
+		}
+		if((Math.abs(blockonetop+blockuptop-blocktwotop)<100 ) && Math.abs(blockoneleft+blockupleft-blocktwoleft)<100)
+		{
+ 
+			stop=1;
+			$("#back").css("display","block");
+			$("#red").css("display","block");
+			$.getJSON("log1.php",function(data){
+				if(data == 0)
+				{
+					$("#lose2").css("display","block");
+				}
+				else
+				{
+					$("#lose1").css("display","block");
+				}			
+
+			});
+ 
+			clearInterval(value6);
+		}
+		if((Math.abs(blockonetop+blockdownheight-100-blocktwotop)<100 ) && Math.abs(blockoneleft+blockdownleft-blocktwoleft)<100 )
+		{
+			stop=1;
+			$("#back").css("display","block");
+			$("#red").css("display","block");
+			$.getJSON("log1.php",function(data){
+				if(data == 0)
+				{
+					$("#lose2").css("display","block");
+				}
+				else
+				{
+					$("#lose1").css("display","block");
+				}			
+
+			});
+ 
+			clearInterval(value6);
+		}
+		if((Math.abs(blockoneleft+blockleftleft-blocktwoleft)<100 )&& Math.abs(blockonetop+blocklefttop-blocktwotop)<100)
+		{
+			stop=1;
+			$("#back").css("display","block");
+			$("#red").css("display","block");
+			$.getJSON("log1.php",function(data){
+				if(data == 0)
+				{
+					$("#lose2").css("display","block");
+				}
+				else
+				{
+					$("#lose1").css("display","block");
+				}			
+
+			});
+ 
+			clearInterval(value6);
+		}
+	  	if((Math.abs(blockoneleft+blockrightwidth-100-blocktwoleft)<100 )&& Math.abs(blockonetop+blockrighttop-blocktwotop)<100)
+		{
+			stop=1;
+			$("#back").css("display","block");
+			
+			$("#red").css("display","block");
+			$.getJSON("log1.php",function(data){
+				if(data == 0)
+				{
+					$("#lose2").css("display","block");
+				}
+				else
+				{
+					$("#lose1").css("display","block");
+				}			
+
+			});
+ 
+			clearInterval(value6);
+		}
+	    },0.0001);	    
+		var value7 = setInterval(function(){
+		initial--;	
+		seconds.innerHTML = initial;
+		if(initial ==0)
+		{
+			clearInterval(value7);
+			stop=1;
+			$("#back").css("display","block");
+			$("#blue").css("display","block");
+			$.getJSON("log.php",function(data){
+				if(data == 0)
+				{
+					$("#lose2").css("display","block");
+				}
+				else
+				{
+					$("#lose1").css("display","block");
+				}			
+
+			});
+ 
+		}
+	    },1000);
+							 
+	    $(document).keydown(function(e){ 
+	    var left1 = document.getElementById("blockone").offsetLeft;
+	    var top1 = document.getElementById("blockone").offsetTop;
+	    var left2 = document.getElementById("blocktwo").offsetLeft;
+	    var top2 = document.getElementById("blocktwo").offsetTop;
+	    var lefte = document.getElementById("e").offsetLeft;
+	    var tope = document.getElementById("e").offsetTop;
+	    var leftf = document.getElementById("f").offsetLeft;
+	    var topf = document.getElementById("f").offsetTop;
+	    var id = e.keyCode;
+	    switch(id){
+		case 32:if(stop==0)
+			{ 
+				if(psycho > 0)
+				{
+					clearInterval(value);			
+					 var block91 = document.getElementById("91").offsetTop;
+					 var distance = block91 - top1;
+					$("#lethal").animate({"top":distance});
+					$("#lethal").animate({"top":"100px"});
+					 value = setInterval(function(){move();},970);
+					psycho--;
+					 break;
+				}
+				else{break;}
+							
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 37:if(stop==0)
+			{
+				if(top1 == top2 && (left2+100) == left1)
+			 	{
+					stop =1;					
+					break;
+			 	}
+			 	else
+			 	{
+					if(left1 == document.getElementById("1").offsetLeft)
+					{
+						break;
+					}				
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						if(left1 == blockleft && top1 == blocktop && color == "rgb(35, 184, 184)")
+						{
+							slowred = 5;
+							break;
+						}	
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}					
+					if(slowred == 0)
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{								
+								div1.animate({'left':"-=100px"},0.0001);	
+								break;					
+							}							
+						} 				
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{								
+								div1.animate({'left':"-=100px"},"slow");
+								slowred = slowred -1;
+								break;					
+							}	
+						}																		
+						break;				
+					}												
+				 }
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 38: 
+			if(stop==0)
+			{
+				if(left1 ==left2 && (top2+100) == top1)
+			 	{
+					stop = 1;					
+					break;
+			 	}
+			 	else
+			 	{
+					if(top1 == document.getElementById("1").offsetTop)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						if(left1 == blockleft && top1 == blocktop && color == "rgb(35, 184, 184)")
+						{
+							slowred = 5;
+							break;
+						}
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if(slowred == 0)
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{
+								div1.animate({'top':"-=100px"},0.0001);
+								break;
+							}
+						} 			
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{
+								div1.animate({'top':"-=100px"},"slow");
+								slowred = slowred -1;
+								break;		
+							}	
+						} 			
+						break;
+					}
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 39: 
+			if(stop==0)
+			{
+				if(top1 == top2 && (left1+100) == left2)
+			 	{
+					stop=1;
+					break;
+				 }
+				 else
+				 {
+					if(left1 == document.getElementById("13").offsetLeft)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						if(left1 == blockleft && top1 == blocktop && color == "rgb(35, 184, 184)")
+						{
+							slowred = 5;
+							break;
+						}
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if(slowred == 0)
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{
+								div1.animate({'left':"+=100px"},0.0001);
+								break;
+							}
+						} 
+	 					break;
+					}
+					else
+					{						
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{
+								div1.animate({'left':"+=100px"},"slow");
+								slowred = slowred -1;
+								break;
+							}
+						} 
+						break;
+					}	
+				 }
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}	
+		case 40: if(stop==0)
+			{
+				if(left1 == left2 && (top1+100)==top2)
+			 	{
+					stop = 1;					
+					break;
+			 	}
+			 	else
+			 	{	
+					if(top1 - topmiddle == 400)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						
+						if(left1 == blockleft && top1 == blocktop && color == "rgb(35, 184, 184)")
+						{
+							slowred = 5;
+							break;
+						}
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if(slowred == 0)
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{
+								div1.animate({'top':"+=100px"},0.0001);
+								break;							
+							}					
+						} 		
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <66;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left1 && smalltop == top1)
+							{
+								div1.animate({'top':"+=100px"},"slow");
+								slowred = slowred -1;
+								break;
+							}
+						} 						
+						break;
+					}
+  			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}			
+		case 65: if(stop==0)
+			{
+				if(top1 == top2 && (left1+100) == left2)
+			 	{
+					stop=1;					
+					break;
+			 	}
+			 	else
+			 	{
+					if(left2 ==document.getElementById("1").offsetLeft)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						
+						if(left2 == blockleft && top2 == blocktop && color == "rgb(255, 48, 48)")
+						{
+							slowblue = 5;
+							break;
+						}
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if(slowblue == 0)
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'left':"-=100px"},0.0001);
+								break;
+							}
+						} 
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'left':"-=100px"},"slow");
+								slowblue = slowblue -1;
+								break;						
+							}							
+						} 						
+						break;
+					}
+			  	}	
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}			
+		case 87:if(stop==0)
+			{ 
+				if(left1 == left2 && (top1+100)==top2)
+			 	{
+					stop = 1;					
+					break;
+			 	}
+			 	else
+			 	{
+					if(top2 == document.getElementById("1").offsetTop)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						
+						if(left2 == blockleft && top2 == blocktop && color == "rgb(255, 48, 48)")
+						{
+							slowblue = 5;
+							break;
+						}
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if(slowblue == 0)
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'top':"-=100px"},0.0001);
+								break;	
+							}
+						} 
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'top':"-=100px"},"slow");
+								slowblue = slowblue -1;
+								break;							
+							}
+						} 
+						break;
+					}
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 68: if(stop == 0)
+			{
+				if(top1 == top2 && (left2+100) == left1)
+			 	{
+					stop=1;					
+					break;
+			 	}
+			 	else
+			 	{	
+					if(left2 == document.getElementById("13").offsetLeft)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						if(left2 == blockleft && top2 == blocktop && color == "rgb(255, 48, 48)")
+						{
+							slowblue = 5;
+							break;
+						}
+					} 
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					} 
+					if(slowblue == 0)
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'left':"+=100px"},0.0001);
+								break;
+							}	
+						} 
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{	
+								div2.animate({'left':"+=100px"},"slow");
+								slowblue = slowblue -1;
+								break;
+							}
+						} 
+						break;
+					}
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 83: if(stop==0)
+			{
+				if(left1 ==left2 && (top2+100) == top1) 
+			 	{
+					stop=1;					
+					break;
+			 	}
+			 	else
+			 	{
+					if(top2 == document.getElementById("79").offsetTop)
+					{
+						break;
+					}
+					for (var i=1;i<66;i++)
+					{
+						var block = $("#"+ i);
+						var blockleft = document.getElementById(i).offsetLeft;
+						var blocktop = document.getElementById(i).offsetTop;
+						var color = block.css("backgroundColor");
+						if(left2 == blockleft && top2 == blocktop && color == "rgb(255, 48, 48)")
+						{
+							slowblue = 5;
+							break;
+						}
+					}  
+					if(Math.abs(topa+top2 - blockonetop) < 100 && Math.abs(lefta+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topb+top2 - blockonetop) < 100 && Math.abs(leftb+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topc+top2 - blockonetop) < 100 && Math.abs(leftc+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if(Math.abs(topd+top2 - blockonetop) < 100 && Math.abs(leftd+left2 - blockoneleft)<100 )
+					{
+						slowred =5;
+					}
+					if((lefte+left2) == left1 && (tope+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if((leftf+left2) == left1 && (topf+top2)== top1)
+					{
+						slowred = 5;
+					}
+					if(slowblue == 0)
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'top':"+=100px"},0.0001);
+								break;
+							}
+						} 
+	 					break;
+					}
+					else
+					{
+						for (var cursor = 1; cursor <92;cursor++)
+						{
+							var smallleft = document.getElementById(cursor).offsetLeft;
+							var smalltop = document.getElementById(cursor).offsetTop;
+							if(smallleft == left2 && smalltop == top2)
+							{
+								div2.animate({'top':"+=100px"},"slow");
+								slowblue = slowblue -1;
+								break;
+							}
+						} 
+						break;
+					}
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 78:if(stop==0)
+			{ 
+				if(count > 0)
+			 	{
+					$("#blockdown").animate({height:"300px"});
+		         		$("#blockright").animate({width:"300px"});
+			 		$("#blockup").animate({height:"300px"});
+			 		$("#blockleft").animate({width:"300px"});
+					count = count -1;
+					cross.innerHTML = count;			 	
+					break;
+			 	}
+			 	else
+			 	{
+					break;
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 66:if(stop==0)
+			{ 
+				if(count1 > 0)
+			 	{
+					for(var id = 1; id<66;id++)
+			 		{	
+						var leftcheck = document.getElementById(id).offsetLeft;
+						var topcheck = document.getElementById(id).offsetTop;	
+						if(top1 == topcheck && left1 == leftcheck)
+						{
+							var color = $("#"+id).css("backgroundColor");						
+							if(color != "rgb(255, 48, 48)")
+							{						
+								document.getElementById(id).style.visibility = "visible";
+								document.getElementById(id).style.backgroundColor="#FF3030";
+								count1 = count1 -1;
+								trap.innerHTML = count1;
+								break;
+							}
+							else
+							{
+								break;
+							}
+						}
+					}
+					
+	        			break;
+			 	}
+			 	else
+			 	{
+					break;
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}	
+		case 50:if(stop==0)
+			{
+				if(count4 >0)
+				{
+					$("#a").css("display","block");
+					$("#b").css("display","block");
+					$("#c").css("display","block");
+					$("#d").css("display","block");
+					$("#a").animate({"left":"200px"});
+					$("#a").animate({"top":"200px"});
+					$("#a").animate({"left":"-200px"});
+					$("#a").animate({"top":"-200px"});
+					$("#b").animate({"left":"-200px"});
+					$("#b").animate({"top":"-200px"});
+					$("#b").animate({"left":"200px"});
+					$("#b").animate({"top":"200px"});
+					$("#c").animate({"top":"-200px"});
+					$("#c").animate({"left":"200px"});
+					$("#c").animate({"top":"200px"});
+					$("#c").animate({"left":"-200px"});
+					$("#d").animate({"top":"200px"});
+					$("#d").animate({"left":"-200px"});
+					$("#d").animate({"top":"-200px"});
+					$("#d").animate({"left":"200px"});
+					count4--;
+					stormguard.innerHTML= count4;
+					break;
+				}
+				else{
+					clearInterval(value1);					
+					break;
+				}
+			}
+			else
+			{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 52:if(stop==0)
+			{ 
+				if(count3 >0)
+			 	{
+			 		$("#e").css("display","block");
+			 		setTimeout(function(){$("#e").css("display","none");},3000);
+		         		count3--;
+					ghost.innerHTML=count3;
+			 		break;
+			 	}	
+			 	else{break;}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 51:if(stop==0)
+			{ 
+				if(count3 > 0)
+			 	{
+			 		$("#f").css("display","block");
+			 		setTimeout(function(){$("#f").css("display","none");},3000);
+					count3--;
+					ghost.innerHTML=count3;
+			 		break;
+			 	}
+			 	else{break;}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+		case 49:if(stop==0)
+			{ 
+				if(count2 > 0)
+				 {
+					for(var id = 1;id<92;id++)
+					{
+						if($("#"+id).css("backgroundColor") == "rgb(35, 184, 184)")
+						{
+							$("#"+id).css({"visibility":"hidden","background-color":"#BEF32E"});
+						}
+					}				
+					for(var id = 1; id<66;id++)
+				 	{		
+						var leftcheck = document.getElementById(id).offsetLeft;
+						var topcheck = document.getElementById(id).offsetTop;	
+						if(top2 == topcheck && left2 == leftcheck)
+						{
+							$("#"+id).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id+1)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id-1)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id+13)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id-13)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id+14)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id-14)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id+12)).css({"visibility":"visible","background-color":"#23B8B8"});
+							$("#"+(id-12)).css({"visibility":"visible","background-color":"#23B8B8"});
+							count2 = count2 -1;
+							hugeblock.innerHTML = count2;
+							break;
+						}
+					}
+					break;
+				 }
+				 else
+			 	{
+					break;
+			 	}
+			}
+			else{
+				clearInterval(value);
+				clearInterval(value1);
+				clearInterval(value2);
+				clearInterval(value3);
+				clearInterval(value4);
+				clearInterval(value5);
+				clearInterval(value6);
+				clearInterval(value7);
+				break;
+			}
+	}
+        });
+			    
+	$(document).keyup(function(e){
+		var id1 = e.keyCode;
+		switch(id1){
+		    case 78: $("#blockdown").animate({height:"100px"});
+		             $("#blockright").animate({width:"100px"});
+			     $("#blockup").animate({height:"100px"});
+			     $("#blockleft").animate({width:"100px"});
+			     break;	
+		    
+		    case 50: setTimeout(function(){
+			     $("#a").css("display","none");
+			     $("#b").css("display","none");
+			     $("#c").css("display","none");
+			     $("#d").css("display","none");
+			    },2000);
+			    break;
+			   }
+	});	
+});
